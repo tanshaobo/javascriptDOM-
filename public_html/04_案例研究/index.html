@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>saber高清壁纸</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #preview{width: 480px;height: 270px;}
+        </style>
+    </head>
+    <body>
+        <h1>saber高清壁纸</h1>
+        <ul>
+            <li>
+                <a href="../image/saber_01.jpg" title="saber_01" onclick="showPic(this);return false;">saber_01</a>
+            </li>
+            <li>
+                <a href="../image/saber_02.jpg" title="saber_02" onclick="showPic(this);return false;">saber_02</a>
+            </li>
+            <li>
+                <a href="../image/saber_03.jpg" title="saber_03" onclick="showPic(this);return false;">saber_03</a>
+            </li>
+            <li>
+                <a href="../image/saber_04.jpg" title="saber_04" onclick="showPic(this);return false;">saber_04</a>
+            </li>
+            <li>
+                <a href="../image/saber_05.jpg" title="saber_05" onclick="showPic(this);return false;">saber_05</a>
+            </li>
+        </ul>
+        <img id="preview"/>
+        <p id="description">Choose an image</p>
+        <script>
+            let source,text;
+            let preview=document.getElementById('preview');
+            let description=document.getElementById('description');
+            function showPic(whichpic){
+               source= whichpic.getAttribute('href');
+               text =whichpic.getAttribute("title");
+               preview.setAttribute('src',source);
+               description.childNodes[0].nodeValue='这是'+text;
+            };
+        </script>
+    </body>
+</html>
