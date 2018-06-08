@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script>
+            let body, p, info, text, em, text2, text3;
+
+            function addLoadEvent(func) {
+                var oldonload = window.onload;
+                if (typeof window.onload !== 'function') {
+                    window.onload = func;
+                } else {
+                    window.onload = function () {
+                        oldonload();
+                        func();
+                    }
+                }
+            }
+            addLoadEvent(first);
+            addLoadEvent(second);
+
+            function first() {
+                p = document.createElement('p');
+                text = document.createTextNode('hello world');
+                p.appendChild(text);
+                p.setAttribute('id', 'p');
+                info = 'nodeName:';
+                info += p.nodeName;
+                info += 'nodeType:';
+                info += p.nodeType;
+                console.log(info);
+                body = document.getElementsByTagName('body')[0];
+                body.appendChild(p);
+            }
+            function second() {
+                p = document.createElement('p');
+                text = document.createTextNode('This is');
+                em = document.createElement('em');
+                text2 = document.createTextNode(' my ');
+                text3 = document.createTextNode('content.');
+                body = document.getElementsByTagName('body')[0];
+                em.appendChild(text2);
+                p.appendChild(text);
+                p.appendChild(em);
+                p.appendChild(text3);
+                body.appendChild(p);
+            }
+        </script>
+    </body>
+</html>

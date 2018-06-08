@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>saber高清壁纸</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #preview{width: 480px;height: 270px;}
+        </style>
+    </head>
+    <body>
+        <h1>saber高清壁纸</h1>
+        <ul>
+            <li>
+                <a href="../image/saber_01.jpg" title="saber_01">saber_01</a>
+            </li>
+            <li>
+                <a href="../image/saber_02.jpg" title="saber_02">saber_02</a>
+            </li>
+            <li>
+                <a href="../image/saber_03.jpg" title="saber_03">saber_03</a>
+            </li>
+            <li>
+                <a href="../image/saber_04.jpg" title="saber_04">saber_04</a>
+            </li>
+            <li>
+                <a href="../image/saber_05.jpg" title="saber_05">saber_05</a>
+            </li>
+        </ul>
+<!--        <img id="preview"/>
+        <p id="description">Choose an image</p>-->
+        <script>
+            let source, text;
+            let img = document.createElement('img');
+            let p = document.createElement('p');
+            let ul = document.getElementsByTagName("ul")[0];
+            let link = ul.getElementsByTagName('a');
+            img.setAttribute('id','preview');
+            p.setAttribute('id','description');
+            let p_text=document.createTextNode('choose an image');
+            p.appendChild(p_text);
+            let body=document.getElementsByTagName('body')[0];
+            ul.parentNode.insertBefore(img,ul);
+            insertAfter(p,ul);
+            function showPic(whichpic) {
+                if (!document.getElementById("preview")) {
+                    return false;
+                }
+                source = whichpic.getAttribute('href');
+                if(preview.nodeName !=='IMG'){
+                    return false;
+                }
+                preview.setAttribute('src', source);
+                if (document.getElementById("description")) {
+                    text = whichpic.getAttribute("title")?whichpic.getAttribute("title"):"";
+                    if(description.childNodes.nodeType===3){}
+                    description.childNodes[0].nodeValue = '这是' + text;
+                }
+                return true;
+            }
+            ;
+            function prepare() {
+                if (!document.getElementsByTagName) {
+                    return false;
+                }
+                for (let i = 0; i < link.length; i++) {
+                    link[i].onclick = function () {
+                        return !showPic(this);
+                    }
+                    link[i].onkeypress=link[i].onclick;
+                }
+
+            }
+            ;
+            function addLoadEvent(func) {
+                var oldonload = window.onload;
+                if (typeof window.onload !== 'function') {
+                    window.onload = func;
+                } else {
+                    window.onload = function () {
+                        oldonload();
+                        func();
+                    }
+                }
+            };
+            addLoadEvent(prepare);
+            function insertAfter(newElement,targetElement){
+                var parent=targetElement.parentNode;
+                if(parent.lastChild===targetElement){
+                    parent.appendChild(newElement);
+                }else{
+                    parent.insertBefore(newElement,targetElement.nextSibling);
+                }
+            };
+        </script>
+    </body>
+</html>
