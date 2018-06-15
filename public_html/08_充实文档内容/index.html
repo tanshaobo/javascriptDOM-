@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -11,9 +6,15 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <ul>
+            <li><a href="index" accesskey="1">Home</a></li>
+            <li><a href="search" accesskey="2">Search</a></li>
+            <li><a href="contact" accesskey="3">Contact</a></li>
+
+        </ul>
         <div>
             <h1>
-                What id  the Document Object Model?
+                What is the Document Object Model?
             </h1>
             <p>
                 The <abbr title="World Wide Web Consortium">W3C</abbr> defines the <abbr title="Document Object Model">DOM</abbr> as:
@@ -67,7 +68,7 @@ and open the template in the editor.
                 document.body.appendChild(dlist);
             }
             ;
-            window.onload = displayAbbreviations();
+            addLoadEvent(displayAbbreviations);
             function addLoadEvent(func) {
                 var oldonload = window.onload;
                 if (typeof window.onload !== 'function') {
@@ -81,11 +82,69 @@ and open the template in the editor.
             }
             ;
             function displayCitations() {
+                //获取所有引用
                 var quotes = document.getElementsByTagName("blockquote");
-//                for(){
-//                    
-//                }
+                for (var i = 0; i < quotes.length; i++) {
+                    //如果没有cite属性，跳过
+                    if (!quotes[i].getAttribute("cite")) {
+                        continue;
+                    }
+                    //保存cite
+                    var url = quotes[i].getAttribute("cite");
+                    //取得引用中的所有元素节点
+                    var quotesChildren = quotes[i].getElementsByTagName("*");
+
+                    if (quotesChildren.length < 1) {
+                        continue;
+                    }
+                    //取得引用中的最后一个节点
+                    var elem = quotesChildren[quotesChildren.length - 1];
+                    //创建标记并追加
+                    var link = document.createElement("a");
+                    var link_text = document.createTextNode("source");
+                    link.appendChild(link_text);
+                    link.setAttribute("href", url);
+                    var superscript = document.createElement("sup");
+                    superscript.appendChild(link);
+                    elem.appendChild(superscript);
+                }
             }
+            addLoadEvent(displayCitations);
+            addLoadEvent(displayAccesskeys);
+            function displayAccesskeys() {
+
+                if (!document.getElementsByTagName || !document.createElement || !document.createTextNode) {
+                    return false;
+                }
+                var links = document.getElementsByTagName("a");
+                console.log(1);
+                var akeys = new Array();
+                for (var i = 0; i < links.length; i++) {
+                    var current_link = links[i];
+                    if (!current_link.getAttribute("accesskey")) {
+                        continue;
+                    }
+                    var key = current_link.getAttribute("accesskey");
+                    var text = current_link.lastChild.nodeValue;
+                    akeys[key] = text;
+                }
+                console.log(akeys);
+                var list = document.createElement("ul");
+                for (key in akeys) {
+                    var text = akeys[key];
+                    var str = key + ":" + text;
+                    var item = document.createElement("li");
+                    var item_text = document.createTextNode(str);
+                    item.appendChild(item_text);
+                    list.appendChild(item);
+                }
+                var header = document.createElement("h3");
+                var header_text = document.createTextNode("Accesskeys");
+                header.appendChild(header_text);
+                document.body.appendChild(header);
+                document.body.appendChild(list);
+            }
+
         </script>
     </body>
 </html>
