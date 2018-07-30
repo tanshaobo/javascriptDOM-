@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p id="message">Whee!</p>
+        <script>
+            addLoadEvent(positionMessage);
+//            addLoadEvent(moveMessage);
+            function positionMessage() {
+                if (!document.getElementById) {
+                    return false;
+                }
+                var elem = document.getElementById("message");
+                elem.style.position = "absolute";
+                elem.style.left = "50px";
+                elem.style.top = "100px";
+                moveMessage("message", 200, 100, 10);
+            }
+            function addLoadEvent(func) {
+                var oldonload = window.onload;
+                if (typeof window.onload != 'function') {
+                    window.onload = func;
+                } else {
+                    window.onload = function () {
+                        oldonload();
+                        func();
+                    };
+                }
+            }
+
+            function moveMessage(elementID, final_x, final_y, interval) {
+                if (!document.getElementById) {
+                    return false;
+                }
+                console.log(1);
+                if (!document.getElementById(elementID)) {
+                    return false;
+                }
+                console.log(2);
+
+                var elem = document.getElementById(elementID);
+                var xpos = parseInt(elem.style.left);
+                var ypos = parseInt(elem.style.top);
+                if (xpos === final_x && ypos === final_y) {
+                    return true;
+                }
+                if (xpos < final_x) {
+                    xpos++;
+                }
+                if (xpos > final_x) {
+                    xpos--;
+                }
+                if (ypos < final_y) {
+                    ypos++;
+                }
+                if (ypos < final_y) {
+                    ypos--;
+                }
+                elem.style.left = xpos + "px";
+                elem.style.right = ypos + "px";
+                var repeat = "moveMessage('" + elementID + "'," + final_x + "," + final_y + "," + interval + ")";
+                movement = setTimeout(repeat, interval);
+            }
+
+        </script>
+    </body>
+</html>
