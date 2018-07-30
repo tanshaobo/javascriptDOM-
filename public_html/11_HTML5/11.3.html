@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>表单</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        邮件：<input type="email"><br>
+        链接：<input type='url'><br>
+        数字：<input type="number"><br>
+        日期：<input type="date"><br>
+        搜索：<input type='search'><br>
+        进度条：<input type="range" value="100"><br>
+        电话：<input type="tel"><br>
+        选色板：<input type="color">
+        <script type='text/javascript'>
+            function inputSupportsType(type){
+                if(!document.createElement){
+                    return false;
+                }
+                var input=document.createElement("input");
+                input.setAttribute("type",type);
+                if(input.type==='text'&&type!=="text"){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+           function elementSupportsAttribute(elementName,attribute){
+               if(!document.createElement){
+                   return false;
+               }
+               var temp=document.createElement(elementName);
+               return (attribute in test);
+           }
+        </script>
+    </body>
+</html>
